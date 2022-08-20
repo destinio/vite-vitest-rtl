@@ -1,32 +1,33 @@
 import { useState } from 'react'
 
-interface TextInputProps extends HTMLInputElement {
+interface TextInputProps {
   color: 'red' | 'green' | 'blue'
-  initValue?: string
-  logger?: (text: string) => void
+  placeholder?: string
+  value: string
+  changeHandler: (text: string) => void
 }
 
 function TextInput({
   color,
   placeholder,
-  initValue = '',
-  logger,
+  value,
+  changeHandler,
 }: TextInputProps) {
-  const [inputValue, setInputValue] = useState(initValue)
-
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputValue(e.target.value)
-    if (logger) {
-      logger(inputValue)
-    }
+    changeHandler(e.target.value)
   }
 
   return (
     <input
       type="text"
-      style={{ color, borderColor: color, padding: '1rem 2rem' }}
+      style={{
+        color,
+        borderColor: color,
+        padding: '1rem 2rem',
+        fontSize: '1.4rem',
+      }}
       placeholder={placeholder}
-      value={inputValue}
+      value={value}
       onChange={handleInputChange}
     />
   )
