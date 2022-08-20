@@ -1,10 +1,14 @@
 interface ButtonProps {
   text: string
-  clickHandler: () => void
+  clickHandler?: () => void
   color?: 'red' | 'blue' | 'green'
 }
 
-const Button = function ({ text, color = 'blue', clickHandler }: ButtonProps) {
+const Button = function ({
+  text,
+  color = 'blue',
+  clickHandler = () => null,
+}: ButtonProps) {
   return (
     <div>
       <button
