@@ -1,10 +1,9 @@
-import { useState } from 'react'
-
 interface TextInputProps {
   color: 'red' | 'green' | 'blue'
   placeholder?: string
   value: string
   changeHandler: (text: string) => void
+  logger?: (text: string) => void
 }
 
 function TextInput({
@@ -12,9 +11,16 @@ function TextInput({
   placeholder,
   value,
   changeHandler,
+  logger,
 }: TextInputProps) {
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    changeHandler(e.target.value)
+    const currentValue = e.target.value
+
+    changeHandler(currentValue)
+
+    if (logger) {
+      logger(currentValue)
+    }
   }
 
   return (
@@ -25,6 +31,8 @@ function TextInput({
         borderColor: color,
         padding: '1rem 2rem',
         fontSize: '1.4rem',
+        border: '.25rem solid',
+        outline: 'none',
       }}
       placeholder={placeholder}
       value={value}
