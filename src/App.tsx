@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button } from './components/Button'
 import { TextInput } from './components/TextInput'
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
 
   function handleAgeInputChange(incomingValue: string) {
     setAge(incomingValue)
+  }
+
+  function submitHandler() {
+    alert(JSON.stringify({ name, favColor, age }, null, 2))
   }
 
   return (
@@ -44,6 +49,7 @@ function App() {
         value={age.toString()}
         changeHandler={handleAgeInputChange}
       />
+      <Button text="click me" clickHandler={submitHandler} />
     </div>
   )
 }
